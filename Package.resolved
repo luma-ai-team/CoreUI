@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FoundationUI",
+        "repositoryURL": "https://github.com/SocialKitLtd/FoundationUI",
+        "state": {
+          "branch": "main",
+          "revision": "11a1ed3c9763ab82e4f1bf2556f025fe69820819",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

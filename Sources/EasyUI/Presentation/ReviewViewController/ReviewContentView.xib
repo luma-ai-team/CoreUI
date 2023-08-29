@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="7yh-IE-xIc" customClass="ReviewContentView" customModule="EasyUI">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="ho2-UQ-Esn">
+                    <rect key="frame" x="24" y="622" width="345" height="206"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="B78-jk-d87">
+                            <rect key="frame" x="45" y="0.0" width="255" height="74"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlock for FREE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okj-wC-EpG" customClass="RoundedFontLabel" customModule="EasyUI">
+                                    <rect key="frame" x="0.0" y="0.0" width="255" height="28.666666666666668"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review us 5 stars on the AppStore to unlock volume limit" textAlignment="center" lineBreakMode="headTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaB-3V-Abs" customClass="RoundedFontLabel" customModule="EasyUI">
+                                    <rect key="frame" x="0.0" y="35.666666666666629" width="255" height="38.333333333333343"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xpi-cx-LQ2">
+                            <rect key="frame" x="41" y="106" width="263" height="100"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbI-F5-3Wi" customClass="FiveStarsView" customModule="EasyUI">
+                                    <rect key="frame" x="66.666666666666657" y="0.0" width="130" height="30"/>
+                                    <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="2yP-Q4-9hu"/>
+                                        <constraint firstAttribute="width" constant="130" id="5Be-1M-eW1"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKy-tF-Ho8" customClass="ShimmerButton" customModule="EasyUI">
+                                    <rect key="frame" x="0.0" y="46" width="263" height="54"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="54" id="SYv-5c-Hjw"/>
+                                        <constraint firstAttribute="width" constant="263" id="wsG-gt-yM5"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                    <state key="normal" title="Review 5 Stars to Unlock"/>
+                                    <connections>
+                                        <action selector="ctaTapped:" destination="7yh-IE-xIc" eventType="touchUpInside" id="yL3-L7-2st"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="kaB-3V-Abs" firstAttribute="width" secondItem="dKy-tF-Ho8" secondAttribute="width" constant="-8" id="c1w-pB-bHT"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Xt6-F6-8Qj"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="ho2-UQ-Esn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7yh-IE-xIc" secondAttribute="top" constant="36" id="4B2-Wp-1AC"/>
+                <constraint firstAttribute="trailing" secondItem="ho2-UQ-Esn" secondAttribute="trailing" constant="24" id="O9T-NZ-wlc"/>
+                <constraint firstItem="ho2-UQ-Esn" firstAttribute="leading" secondItem="7yh-IE-xIc" secondAttribute="leading" constant="24" id="e7t-xL-0cE"/>
+                <constraint firstAttribute="bottom" secondItem="ho2-UQ-Esn" secondAttribute="bottom" constant="24" id="sed-5y-8nA"/>
+            </constraints>
+            <connections>
+                <outlet property="ctaButton" destination="dKy-tF-Ho8" id="gnR-DL-PlS"/>
+                <outlet property="starsView" destination="sbI-F5-3Wi" id="jzd-2d-5sD"/>
+                <outlet property="subtitleLabel" destination="kaB-3V-Abs" id="CrD-Fo-lvQ"/>
+                <outlet property="titleLabel" destination="okj-wC-EpG" id="052-jW-JQJ"/>
+            </connections>
+            <point key="canvasLocation" x="22" y="-627"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
