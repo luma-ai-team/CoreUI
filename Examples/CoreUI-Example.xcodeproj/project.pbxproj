@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D4AF5152A9E7638007E7E98 /* CoreUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2D4AF5142A9E7638007E7E98 /* CoreUI */; };
 		57B94A9225889A2E005A19F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B94A9125889A2E005A19F9 /* AppDelegate.swift */; };
 		57B94A9425889A2E005A19F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B94A9325889A2E005A19F9 /* SceneDelegate.swift */; };
 		57B94A9625889A2E005A19F9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B94A9525889A2E005A19F9 /* ViewController.swift */; };
 		57B94A9925889A2E005A19F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57B94A9725889A2E005A19F9 /* Main.storyboard */; };
 		57B94A9B25889A30005A19F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57B94A9A25889A30005A19F9 /* Assets.xcassets */; };
 		57B94A9E25889A30005A19F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57B94A9C25889A30005A19F9 /* LaunchScreen.storyboard */; };
-		57B94AB125889ABB005A19F9 /* EasyUI in Frameworks */ = {isa = PBXBuildFile; productRef = 57B94AB025889ABB005A19F9 /* EasyUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		57B94A8E25889A2E005A19F9 /* EasyUI-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EasyUI-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		57B94A8E25889A2E005A19F9 /* CoreUI-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreUI-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57B94A9125889A2E005A19F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57B94A9325889A2E005A19F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		57B94A9525889A2E005A19F9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -33,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57B94AB125889ABB005A19F9 /* EasyUI in Frameworks */,
+				2D4AF5152A9E7638007E7E98 /* CoreUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,7 +44,7 @@
 			isa = PBXGroup;
 			children = (
 				57B94AAD25889A9E005A19F9 /* EasyUI */,
-				57B94A9025889A2E005A19F9 /* EasyUI-Example */,
+				57B94A9025889A2E005A19F9 /* CoreUI-Example */,
 				57B94A8F25889A2E005A19F9 /* Products */,
 				57B94AAF25889ABB005A19F9 /* Frameworks */,
 			);
@@ -53,12 +53,12 @@
 		57B94A8F25889A2E005A19F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				57B94A8E25889A2E005A19F9 /* EasyUI-Example.app */,
+				57B94A8E25889A2E005A19F9 /* CoreUI-Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		57B94A9025889A2E005A19F9 /* EasyUI-Example */ = {
+		57B94A9025889A2E005A19F9 /* CoreUI-Example */ = {
 			isa = PBXGroup;
 			children = (
 				57B94A9125889A2E005A19F9 /* AppDelegate.swift */,
@@ -69,7 +69,7 @@
 				57B94A9C25889A30005A19F9 /* LaunchScreen.storyboard */,
 				57B94A9F25889A30005A19F9 /* Info.plist */,
 			);
-			path = "EasyUI-Example";
+			path = "CoreUI-Example";
 			sourceTree = "<group>";
 		};
 		57B94AAF25889ABB005A19F9 /* Frameworks */ = {
@@ -82,9 +82,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		57B94A8D25889A2E005A19F9 /* EasyUI-Example */ = {
+		57B94A8D25889A2E005A19F9 /* CoreUI-Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 57B94AA225889A30005A19F9 /* Build configuration list for PBXNativeTarget "EasyUI-Example" */;
+			buildConfigurationList = 57B94AA225889A30005A19F9 /* Build configuration list for PBXNativeTarget "CoreUI-Example" */;
 			buildPhases = (
 				57B94A8A25889A2E005A19F9 /* Sources */,
 				57B94A8B25889A2E005A19F9 /* Frameworks */,
@@ -95,12 +95,12 @@
 			dependencies = (
 				57A8CB5B25BEAF6F00932A51 /* PBXTargetDependency */,
 			);
-			name = "EasyUI-Example";
+			name = "CoreUI-Example";
 			packageProductDependencies = (
-				57B94AB025889ABB005A19F9 /* EasyUI */,
+				2D4AF5142A9E7638007E7E98 /* CoreUI */,
 			);
 			productName = shimmerTest;
-			productReference = 57B94A8E25889A2E005A19F9 /* EasyUI-Example.app */;
+			productReference = 57B94A8E25889A2E005A19F9 /* CoreUI-Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -117,7 +117,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 57B94A8925889A2E005A19F9 /* Build configuration list for PBXProject "EasyUI-Example" */;
+			buildConfigurationList = 57B94A8925889A2E005A19F9 /* Build configuration list for PBXProject "CoreUI-Example" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -132,7 +132,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				57B94A8D25889A2E005A19F9 /* EasyUI-Example */,
+				57B94A8D25889A2E005A19F9 /* CoreUI-Example */,
 			);
 		};
 /* End PBXProject section */
@@ -313,7 +313,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A5KVFWW9PB;
-				INFOPLIST_FILE = "EasyUI-Example/Info.plist";
+				INFOPLIST_FILE = "CoreUI-Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -333,7 +333,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A5KVFWW9PB;
-				INFOPLIST_FILE = "EasyUI-Example/Info.plist";
+				INFOPLIST_FILE = "CoreUI-Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -349,7 +349,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		57B94A8925889A2E005A19F9 /* Build configuration list for PBXProject "EasyUI-Example" */ = {
+		57B94A8925889A2E005A19F9 /* Build configuration list for PBXProject "CoreUI-Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				57B94AA025889A30005A19F9 /* Debug */,
@@ -358,7 +358,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		57B94AA225889A30005A19F9 /* Build configuration list for PBXNativeTarget "EasyUI-Example" */ = {
+		57B94AA225889A30005A19F9 /* Build configuration list for PBXNativeTarget "CoreUI-Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				57B94AA325889A30005A19F9 /* Debug */,
@@ -370,11 +370,11 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		57A8CB5A25BEAF6F00932A51 /* EasyUI */ = {
+		2D4AF5142A9E7638007E7E98 /* CoreUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = EasyUI;
+			productName = CoreUI;
 		};
-		57B94AB025889ABB005A19F9 /* EasyUI */ = {
+		57A8CB5A25BEAF6F00932A51 /* EasyUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = EasyUI;
 		};

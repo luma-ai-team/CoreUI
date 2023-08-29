@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "57B94A8D25889A2E005A19F9"
-               BuildableName = "EasyUI-Example.app"
-               BlueprintName = "EasyUI-Example"
-               ReferencedContainer = "container:EasyUI-Example.xcodeproj">
+               BuildableName = "CoreUI-Example.app"
+               BlueprintName = "CoreUI-Example"
+               ReferencedContainer = "container:CoreUI-Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "57B94A8D25889A2E005A19F9"
-            BuildableName = "EasyUI-Example.app"
-            BlueprintName = "EasyUI-Example"
-            ReferencedContainer = "container:EasyUI-Example.xcodeproj">
+            BuildableName = "CoreUI-Example.app"
+            BlueprintName = "CoreUI-Example"
+            ReferencedContainer = "container:CoreUI-Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "57B94A8D25889A2E005A19F9"
-            BuildableName = "EasyUI-Example.app"
-            BlueprintName = "EasyUI-Example"
-            ReferencedContainer = "container:EasyUI-Example.xcodeproj">
+            BuildableName = "CoreUI-Example.app"
+            BlueprintName = "CoreUI-Example"
+            ReferencedContainer = "container:CoreUI-Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -1,7 +1,7 @@
 import XCTest
 
-import EasyUITests
+import CoreUITests
 
 var tests = [XCTestCaseEntry]()
-tests += EasyUITests.allTests()
+tests += CoreUITests.allTests()
 XCTMain(tests)

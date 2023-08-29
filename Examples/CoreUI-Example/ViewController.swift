@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import EasyUI
+import CoreUI
 
 class ViewController: UIViewController {
 
