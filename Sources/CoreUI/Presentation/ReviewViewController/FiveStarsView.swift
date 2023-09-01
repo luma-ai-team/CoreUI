@@ -12,7 +12,7 @@ open class FiveStarsView: UIView {
     private let gradientView = GradientView()
     private let stackView = UIStackView()
 
-    public var gradient: Gradient = .solid(.systemPink) {
+    private var gradient: Gradient = .solid(UIColor(hex: "ED8834")) {
         didSet {
             gradientView.gradient = gradient
         }

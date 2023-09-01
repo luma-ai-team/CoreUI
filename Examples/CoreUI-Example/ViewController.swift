@@ -18,7 +18,7 @@ class ViewController: UIViewController {
       background: UIColor(named: "background")!,
       foreground: UIColor(named: "foreground")!,
       disabled: UIColor(named: "disabled")!,
-      ctaForeground: .systemPink,
+      ctaForeground: .white,
       gradient:  Gradient(direction: .horizontal, colors: [UIColor(hex: "#3C36FF"), UIColor(hex: "#514BF1")])
       )
     
@@ -32,5 +32,15 @@ class ViewController: UIViewController {
         view.addSubview(shimmerButton)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showReviewDialog()
+    }
+    
+    
+    func showReviewDialog() {
+        let reviewViewController = ReviewViewController(colorScheme: colorScheme)
+        present(reviewViewController, animated: true)
+    }
   
 }
