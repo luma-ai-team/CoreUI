@@ -41,6 +41,9 @@ class ViewController: UIViewController {
     func showReviewDialog() {
         let reviewViewController = ReviewViewController(colorScheme: colorScheme)
         present(reviewViewController, animated: true)
+        reviewViewController.didReviewApp = {
+            print("did review app")
+        }
     }
   
 }

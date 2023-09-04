@@ -1,23 +1,19 @@
 
 import UIKit
 
-
-public protocol ReviewControllerOutput: AnyObject {
-    func reviewViewControllerCtaTapped(_ reviewViewController: ReviewViewController)
-}
-
 open class ReviewViewController: PopupViewController {
     
     // MARK: - Outlets
-    public weak var output: ReviewControllerOutput?
+    public var didReviewApp: (() -> Void)?
     
     let reviewContentView: ReviewContentView
     
-    public init
-    (title: String = "Save for FREE",
-     subtitle: String = "Review us 5 stars on the App Store, and save for free!",
-     ctaTitle: String = "Review 5 Stars to Save",
-     colorScheme: ColorScheme) {
+    public init(
+        title: String = "Save for FREE",
+        subtitle: String = "Review us 5 stars on the App Store, and save for free!",
+        ctaTitle: String = "Review 5 Stars to Save",
+        colorScheme: ColorScheme
+    ) {
         let reviewContentView: ReviewContentView = UIView.fromNib(bundle: .module)
         reviewContentView.titleLabel.text = title
         reviewContentView.subtitleLabel.text = subtitle
@@ -28,9 +24,13 @@ open class ReviewViewController: PopupViewController {
             backgroundColor: colorScheme.foreground,
             closeTintColor: colorScheme.subtitle,
             closeImage: nil,
-            viewBackgroundStyle: .color(.black.withAlphaComponent(0.7)))
+            viewBackgroundStyle: .color(.black.withAlphaComponent(0.7))
+        )
         super.init(initWith: reviewContentView, appearance: appearance)
-        reviewContentView.delegate = self
+        
+        reviewContentView.ctaButtonTappedClosure = { [weak self] in
+            self?.didReviewApp?()
+        }
     }
     
     required public init?(coder: NSCoder) {
@@ -43,12 +43,5 @@ open class ReviewViewController: PopupViewController {
     
     open override func viewDimmedTapped() {
         dismiss(animated: true)
-    }
-}
-
-
-extension ReviewViewController: ReviewContentViewDelegate {
-    func reviewContentViewCtaTapped(_ reviewContentView: ReviewContentView) {
-        output?.reviewViewControllerCtaTapped(self)
     }
 }

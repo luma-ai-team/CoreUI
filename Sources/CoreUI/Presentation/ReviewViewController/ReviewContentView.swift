@@ -1,16 +1,5 @@
-//
-//  ReviewContentView.swift
-//  
-//
-//  Created by Roi Mulia on 17/01/2023.
-//
 
 import UIKit
-
-
-protocol ReviewContentViewDelegate: AnyObject {
-    func reviewContentViewCtaTapped(_ reviewContentView: ReviewContentView)
-}
 
 class ReviewContentView: UIView, ContentableView {
  
@@ -18,10 +7,8 @@ class ReviewContentView: UIView, ContentableView {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var ctaButton: ShimmerButton!
     @IBOutlet weak var starsView: FiveStarsView!
-    
-    weak var delegate: ReviewContentViewDelegate?
-    
-        
+    var ctaButtonTappedClosure: (() -> Void)?
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .clear
@@ -43,7 +30,7 @@ class ReviewContentView: UIView, ContentableView {
 
 
     @IBAction func ctaTapped(_ sender: Any) {
-        delegate?.reviewContentViewCtaTapped(self)
+        ctaButtonTappedClosure?()
     }
     
     func postAppearanceActions() {
