@@ -84,7 +84,7 @@ open class ShimmerButton: GradientButton {
         let animation = CABasicAnimation(keyPath: "transform.translation.x")
         animation.fromValue = -self.bounds.width
         animation.toValue = self.bounds.width
-        animation.duration = 3.0
+        animation.duration = 2.5
         
         // Set animation properties
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
