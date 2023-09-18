@@ -8,23 +8,10 @@
 import UIKit
 
 
-open class ExtendedHitTestButton: UIButton {
+open class ExtendedHitTestButton: BounceButton {
     
     public var hitTestPadding: UIEdgeInsets?
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    public required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        commonInit()
-    }
-    
-    func commonInit() {
-        addBounce()
-    }
 
     open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if let hitTestPadding = hitTestPadding, isUserInteractionEnabled {
