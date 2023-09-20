@@ -8,6 +8,7 @@ open class ShareButton: ExtendedHitTestButton {
     // UI Elements
     private let gradientBackgroundView = GradientView()
     private let shareIconImage = UIImage(named: "shareImage", in: .module, compatibleWith: nil)
+    public var colorScheme: ColorScheme?
     
     // Callback for tap action
     public var onTapAction: (() -> ())?
@@ -21,7 +22,8 @@ open class ShareButton: ExtendedHitTestButton {
     public init(using colorScheme: ColorScheme) {
         super.init(frame: .zero)
         commonSetup()
-        applyColorScheme(colorScheme)
+        self.colorScheme = colorScheme
+        setActiveState()
     }
     
     public required init?(coder: NSCoder) {
@@ -60,9 +62,23 @@ open class ShareButton: ExtendedHitTestButton {
     }
     
     // Apply color scheme
-    public func applyColorScheme(_ colorScheme: ColorScheme) {
+    public func setActiveState() {
+        isUserInteractionEnabled = true
+        guard let colorScheme = colorScheme else {
+            return
+        }
         gradientBackgroundView.gradient = colorScheme.gradient
         tintColor = colorScheme.ctaForeground
         setTitleColor(colorScheme.ctaForeground, for: .normal)
+    }
+    
+    public func setDisabledState() {
+        isUserInteractionEnabled = false
+        guard let colorScheme = colorScheme else {
+            return
+        }
+        gradientBackgroundView.gradient = .solid(colorScheme.disabled)
+        tintColor = colorScheme.title.withAlphaComponent(0.2)
+        setTitleColor(colorScheme.title.withAlphaComponent(0.2), for: .normal)
     }
 }
