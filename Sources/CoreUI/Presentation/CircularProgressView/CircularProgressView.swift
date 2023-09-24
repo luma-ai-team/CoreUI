@@ -6,13 +6,13 @@
 
 import UIKit
 
-class CircularProgressView: UIView {
+open class CircularProgressView: UIView {
     public enum Animation {
         case none
         case basic(duration: TimeInterval)
     }
 
-    struct Appearance {
+    public struct CircularProgressViewAppearance {
         let emptyColor: UIColor
         let fillColor: UIColor
         let lineWidth: CGFloat
@@ -32,18 +32,18 @@ class CircularProgressView: UIView {
         return layer
     }()
 
-    var appearance: Appearance = .init(emptyColor: .red, fillColor: .blue, lineWidth: 10) {
+    public var appearance: CircularProgressViewAppearance = .init(emptyColor: .red, fillColor: .blue, lineWidth: 10) {
         didSet {
             updateAppearance()
         }
     }
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
 
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
     }
@@ -64,7 +64,7 @@ class CircularProgressView: UIView {
         progressLayer.lineWidth = appearance.lineWidth
     }
 
-    override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         let path = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0,
                                                    y: frame.size.height / 2.0),
