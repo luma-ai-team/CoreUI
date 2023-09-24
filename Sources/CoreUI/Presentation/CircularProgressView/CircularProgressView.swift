@@ -16,6 +16,12 @@ open class CircularProgressView: UIView {
         let emptyColor: UIColor
         let fillColor: UIColor
         let lineWidth: CGFloat
+        
+        public init(emptyColor: UIColor, fillColor: UIColor, lineWidth: CGFloat) {
+            self.emptyColor = emptyColor
+            self.fillColor = fillColor
+            self.lineWidth = lineWidth
+        }
     }
 
     private lazy var backgroundLayer: CAShapeLayer = {
