@@ -163,9 +163,9 @@ class AlertContentView: UIView, ContentableView, ForceViewUpdate {
             visualAidContainer.isHiddenInStackView = false
             aidView = indicator
         case .progress(let progress):
-            let view = (aidView as? CircularProgressView) ?? CircularProgressView()
+            let view = (aidView as? CircularGradientProgressView) ?? CircularGradientProgressView()
             view.appearance = .init(emptyColor: appearance.titleColor.withAlphaComponent(0.25),
-                                    fillColor: appearance.titleColor,
+                                    fillGradient: .solid(appearance.titleColor),
                                     lineWidth: 6.0)
             view.widthAnchor.constraint(equalToConstant: 30).isActive = true
             view.heightAnchor.constraint(equalToConstant: 30).isActive = true
