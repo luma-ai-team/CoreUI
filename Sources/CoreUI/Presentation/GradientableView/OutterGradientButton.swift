@@ -9,7 +9,7 @@
 import UIKit
 
 
-open class OutterGradientButton: GradientButton, BounceableView {
+open class OutterGradientButton: GradientButton {
 
     public var bounceStyle: BounceAnimationStyle = .heavy
     

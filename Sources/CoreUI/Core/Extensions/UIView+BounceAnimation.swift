@@ -7,52 +7,37 @@
 
 import UIKit
 
+public enum BounceAnimationStyle: CGFloat {
+    case soft = 0.01
+    case medium = 0.03
+    case heavy = 0.05
+    case none = 0
+}
 
 
 public extension UIView {
-    
-    enum BounceAnimationStyle: CGFloat {
-        case soft = 0.01
-        case medium = 0.03
-        case heavy = 0.05
-        case none = 0
-    }
-    
-    
+        
     func applyBounceAnimation(style: BounceAnimationStyle = .heavy, startDelay: TimeInterval = 1, endDelay: TimeInterval = 1, shouldRepeat: Bool = true) {
        
-        var options: UIView.KeyframeAnimationOptions {
-            if shouldRepeat {
-                return  [.allowUserInteraction, .repeat]
-            }
-            return [.allowUserInteraction]
-        }
-        
         let totalDuration: Double = 0.2 + 0.17 + 0.1 + 0.2 + endDelay
         let appender: CGFloat = style.rawValue
-        UIView.animateKeyframes(withDuration: totalDuration, delay: startDelay, options: options, animations: {
-            
-            var relativeStartTime: Double = 0
-            
-            UIView.addKeyframe(withRelativeStartTime: relativeStartTime, relativeDuration: 0.2 / totalDuration) {
-                self.transform = .init(scaleX: 1 + appender, y: 1 + appender)
-            }
-            
-            relativeStartTime +=  0.2 / totalDuration
-            UIView.addKeyframe(withRelativeStartTime: relativeStartTime , relativeDuration: 0.17 / totalDuration) {
-                self.transform = .init(scaleX: 1 - appender, y: 1 - appender)
-            }
-            
-            relativeStartTime +=  0.17 / totalDuration
-            UIView.addKeyframe(withRelativeStartTime: relativeStartTime , relativeDuration: 0.1 / totalDuration) {
-                self.transform = .init(scaleX: 1 + appender * (0.75), y: 1 + appender * (0.75))
-            }
-            
-            relativeStartTime +=  0.1 / totalDuration
-            UIView.addKeyframe(withRelativeStartTime: relativeStartTime , relativeDuration: 0.2 / totalDuration) {
-                self.transform = .identity
-            }
-            
-        }, completion: nil)
+
+        let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
+        scaleAnimation.keyTimes = [0, NSNumber(value: 0.2 / totalDuration), NSNumber(value: (0.2 + 0.17) / totalDuration), NSNumber(value: (0.2 + 0.17 + 0.1) / totalDuration), 1]
+        scaleAnimation.values = [1, 1 + appender, 1 - appender, 1 + appender * 0.75, 1]
+        scaleAnimation.duration = totalDuration
+
+        if shouldRepeat {
+            scaleAnimation.repeatCount = .infinity
+        }
+
+        scaleAnimation.isRemovedOnCompletion = false
+        scaleAnimation.fillMode = .forwards
+        scaleAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+
+        let delayTime = DispatchTime.now() + startDelay
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            self.layer.add(scaleAnimation, forKey: nil)
+        }
     }
 }

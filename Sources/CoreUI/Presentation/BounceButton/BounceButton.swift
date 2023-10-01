@@ -4,9 +4,7 @@
 
 import UIKit
 
-open class BounceButton: UIButton, BounceableView {
-    public var shouldBounceSuperview: Bool = false
-    
+open class BounceButton: UIButton {    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
