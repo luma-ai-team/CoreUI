@@ -10,12 +10,13 @@ import UIKit
 
 public extension UIView {
     
-    func addBounce() {
+    @discardableResult func addBounce() -> UILongPressGestureRecognizer {
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleGesture))
         gesture.minimumPressDuration = 0
         gesture.cancelsTouchesInView = false
         isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)
+        return gesture
     }
     
     @objc private func handleGesture(_ gesture: UILongPressGestureRecognizer) {

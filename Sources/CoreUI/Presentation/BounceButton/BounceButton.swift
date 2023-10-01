@@ -4,7 +4,7 @@
 
 import UIKit
 
-open class BounceButton: UIButton {    
+open class BounceButton: UIButton, UIGestureRecognizerDelegate {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -17,6 +17,11 @@ open class BounceButton: UIButton {
     
     func commonInit() {
         adjustsImageWhenHighlighted = false
-        addBounce()
+        let gestureRecognizer = addBounce()
+        gestureRecognizer.delegate = self
+    }
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true 
     }
 }
