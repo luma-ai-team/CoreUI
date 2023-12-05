@@ -4,17 +4,6 @@ import UIKit
 
 open class CTAButton: GradientButton {
     
-    open override var isUserInteractionEnabled: Bool {
-        get {
-            print("get")
-            return super.isUserInteractionEnabled
-        }
-        set {
-            print("set")
-            super.isUserInteractionEnabled = newValue
-        }
-    }
-    
     // UI Elements
     public var colorScheme: ColorScheme?
     public var hitTestPadding: UIEdgeInsets?
