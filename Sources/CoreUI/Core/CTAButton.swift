@@ -4,10 +4,21 @@ import UIKit
 
 open class CTAButton: GradientButton {
     
+    open override var isUserInteractionEnabled: Bool {
+        get {
+            print("get")
+            return super.isUserInteractionEnabled
+        }
+        set {
+            print("set")
+            super.isUserInteractionEnabled = newValue
+        }
+    }
+    
     // UI Elements
     public var colorScheme: ColorScheme?
     public var hitTestPadding: UIEdgeInsets?
-
+    
     // Callback for tap action
     public var onTapAction: (() -> ())?
     
@@ -30,8 +41,8 @@ open class CTAButton: GradientButton {
     }
     
     // Common UI setup
-     func commonSetup() {
-         addBounce()
+    func commonSetup() {
+        addBounce()
         hitTestPadding = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
@@ -59,11 +70,11 @@ open class CTAButton: GradientButton {
             return
         }
         backgroundGradient = .solid(colorScheme.disabled)
-        tintColor = colorScheme.title.withAlphaComponent(0.2)
-        setTitleColor(colorScheme.title.withAlphaComponent(0.2), for: .normal)
-        titleGradient = .solid(colorScheme.title.withAlphaComponent(0.2))
+        tintColor = colorScheme.title.withAlphaComponent(0.4)
+        setTitleColor(colorScheme.title.withAlphaComponent(0.4), for: .normal)
+        titleGradient = .solid(colorScheme.title.withAlphaComponent(0.4))
     }
-
+    
     open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if let hitTestPadding = hitTestPadding, isUserInteractionEnabled {
             let adjustedFrame = bounds.inset(by: .init(top: -hitTestPadding.top, left: -hitTestPadding.left, bottom: -hitTestPadding.bottom, right: -hitTestPadding.right))
