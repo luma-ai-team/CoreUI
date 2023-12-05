@@ -27,7 +27,7 @@ class PopupTransition: NSObject, UIViewControllerTransitioningDelegate, UIViewCo
     // MARK: - UIViewControllerAnimatedTransitioning
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.4
+        return 0.28
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

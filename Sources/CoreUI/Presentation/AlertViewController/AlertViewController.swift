@@ -21,7 +21,7 @@ open class AlertViewController: PopupViewController {
             backgroundColor: .red,
             closeTintColor: .red,
             closeImage: nil,
-            viewBackgroundStyle: .color(.black.withAlphaComponent(0.5)),
+            viewBackgroundStyle: .color(.black.withAlphaComponent(0.2)),
             cornerRadius: 13)
         super.init(initWith: alertContentView, appearance: appearance)
     }
