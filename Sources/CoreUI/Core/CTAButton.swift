@@ -59,9 +59,9 @@ open class CTAButton: GradientButton {
             return
         }
         backgroundGradient = .solid(colorScheme.disabled)
-        tintColor = colorScheme.title.withAlphaComponent(0.4)
-        setTitleColor(colorScheme.title.withAlphaComponent(0.4), for: .normal)
-        titleGradient = .solid(colorScheme.title.withAlphaComponent(0.4))
+        tintColor = colorScheme.subtitle.withAlphaComponent(0.7)
+        setTitleColor(colorScheme.subtitle.withAlphaComponent(0.7), for: .normal)
+        titleGradient = .solid(colorScheme.subtitle.withAlphaComponent(0.7))
     }
     
     open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
