@@ -233,16 +233,3 @@ class AlertContentView: UIView, ContentableView, ForceViewUpdate {
         //
     }
 }
-
-fileprivate extension UIView {
-    var isHiddenInStackView: Bool {
-        get {
-            return isHidden
-        }
-        set {
-            if isHidden != newValue {
-                isHidden = newValue
-            }
-        }
-    }
-}

@@ -76,5 +76,15 @@ public extension UIView {
         centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
-    
+
+    var isHiddenInStackView: Bool {
+        get {
+            return isHidden
+        }
+        set {
+            if isHidden != newValue {
+                isHidden = newValue
+            }
+        }
+    }
 }
