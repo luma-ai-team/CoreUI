@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import Foundation
 
 public protocol Coordinator: AnyObject {
     var delegate: CoordinatorDelegate? { get set }
@@ -44,6 +45,10 @@ open class BaseCoordinator<V: UIViewController>: NSObject, Coordinator, Coordina
         }) {
             childCoordinators.remove(at: index)
         }
+    }
+    
+    open func findCoordinator<T: Coordinator>(ofType type: T.Type) -> T? {
+        return childCoordinators.first { $0 is T } as? T
     }
     
     open func start() {
