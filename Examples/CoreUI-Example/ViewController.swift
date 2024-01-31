@@ -34,7 +34,8 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showReviewDialog()
+        //showReviewDialog()
+        showSheet()
     }
     
     
@@ -44,6 +45,14 @@ class ViewController: UIViewController {
         reviewViewController.didReviewApp = {
             print("did review app")
         }
+    }
+    
+    func showSheet() {
+        let error = SheetInfoViewController(image: UIImage(systemName: "xmark"), title: "wow", subtitle: nil, colorScheme: colorScheme)
+        
+        let sheetViewController = SheetViewController(content: error)
+        
+        present(sheetViewController, animated: true)
     }
   
 }
