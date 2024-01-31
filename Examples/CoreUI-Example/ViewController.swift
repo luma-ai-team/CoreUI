@@ -48,9 +48,15 @@ class ViewController: UIViewController {
     }
     
     func showSheet() {
+        
         let error = SheetInfoViewController(image: UIImage(systemName: "xmark"), title: "wow", subtitle: nil, colorScheme: colorScheme)
         
         let sheetViewController = SheetViewController(content: error)
+        
+        sheetViewController.dismissHandler = {
+            print("dismissed")
+        }
+        
         
         present(sheetViewController, animated: true)
     }

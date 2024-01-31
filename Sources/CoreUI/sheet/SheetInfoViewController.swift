@@ -7,7 +7,7 @@
 
 import UIKit
 
-open class SheetInfoViewController: UIViewController {
+open class SheetInfoViewController: UIViewController  {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -56,5 +56,9 @@ open class SheetInfoViewController: UIViewController {
         view.backgroundColor = colorScheme.foreground
     }
 
+    
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        onDismiss?()
+    }
 
 }

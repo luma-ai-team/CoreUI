@@ -10,7 +10,7 @@ import UIKit
 open class SheetViewController: UIViewController {
     var content: any SheetContent
 
-    var dismissHandler: (() -> Void)?
+    public var dismissHandler: (() -> Void)?
 
 
     private var sheet: UISheetPresentationController {
@@ -32,6 +32,10 @@ open class SheetViewController: UIViewController {
     public init(content: any SheetContent) {
         self.content = content
         super.init(nibName: nil, bundle: nil)
+        #warning("TODO: Add content together")
+        content.onDismiss = { [weak self] in
+            self?.dismissHandler?()
+        }
         setup()
     }
     
@@ -41,13 +45,13 @@ open class SheetViewController: UIViewController {
     
     private func setup() {
         super.modalPresentationStyle = .formSheet
+        
     }
 
     open override func viewDidLoad() {
         super.viewDidLoad()
         sheet.prefersScrollingExpandsWhenScrolledToEdge = false
         sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
-
         update(with: content)
     }
 
@@ -89,6 +93,9 @@ open class SheetViewController: UIViewController {
         view.addSubview(content.view)
         content.view.layoutIfNeeded()
 
+        content.onDismiss = { [weak self] in
+            self?.dismissHandler?()
+        }
         updateContent()
     }
 

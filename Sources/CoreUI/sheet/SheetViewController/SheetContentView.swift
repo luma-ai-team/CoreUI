@@ -15,6 +15,7 @@ public  protocol SheetContentHeightProvider {
 public protocol SheetContent: AnyObject, SheetContentHeightProvider {
     var isModal: Bool { get }
     var view: UIView! { get }
+    var onDismiss: (() -> Void)? { get set }
 }
 
 extension UIView: SheetContentHeightProvider {
@@ -27,6 +28,14 @@ extension UIView: SheetContentHeightProvider {
 }
 
 extension UIViewController: SheetContent {
+ 
+    public var onDismiss: (() -> Void)? {
+         get { nil }
+         set {
+            
+         }
+     }
+    
     public var isModal: Bool {
         return isModalInPresentation
     }
