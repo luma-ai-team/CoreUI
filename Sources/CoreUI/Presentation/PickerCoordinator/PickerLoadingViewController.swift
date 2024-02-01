@@ -13,6 +13,7 @@ class PickerLoadingViewController: UIViewController {
     private var titleLabel: UILabel!
     private var visualEffectView: UIVisualEffectView!
     private let colorScheme: ColorScheme
+    
     init(colorScheme: ColorScheme) {
         self.colorScheme = colorScheme
         super.init(nibName: nil, bundle: nil)
