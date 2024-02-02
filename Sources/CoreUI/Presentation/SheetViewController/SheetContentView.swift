@@ -7,15 +7,18 @@
 
 import UIKit
 
-public  protocol SheetContentHeightProvider {
+public protocol SheetContentHeightProvider {
     @available(iOS 16.0, *)
     var heightResolver: (UISheetPresentationControllerDetentResolutionContext) -> CGFloat { get }
+}
+
+public protocol DismissableSheetContent: AnyObject {
+    var dismissHandler: (() -> Void)? { get set }
 }
 
 public protocol SheetContent: AnyObject, SheetContentHeightProvider {
     var isModal: Bool { get }
     var view: UIView! { get }
-    var onDismiss: (() -> Void)? { get set }
 }
 
 extension UIView: SheetContentHeightProvider {
@@ -28,14 +31,6 @@ extension UIView: SheetContentHeightProvider {
 }
 
 extension UIViewController: SheetContent {
- 
-    public var onDismiss: (() -> Void)? {
-         get { nil }
-         set {
-            
-         }
-     }
-    
     public var isModal: Bool {
         return isModalInPresentation
     }

@@ -3,44 +3,49 @@ import AVFoundation
 import PhotosUI
 import Vision
 
-// MARK: - Protocols
-
-protocol PickerCoordinatorOutput: AnyObject {
-    func systemPickerCoordinator(_ coordinator: SystemPickerCoordinator, didPickImage image: UIImage, in sheetViewController: SheetViewController)
-    func systemPickerCoordinator(_ coordinator: SystemPickerCoordinator, didPickVideo video: AVAsset, in sheetViewController: SheetViewController)
+public protocol PickerCoordinatorOutput: AnyObject {
+    func systemPickerCoordinatorDidSelect(_ coordinator: SystemPickerCoordinator, image: UIImage)
+    func systemPickerCoordinatorDidSelect(_ coordinator: SystemPickerCoordinator, asset: AVAsset)
+    func systemPickerCoordinatorDidCancel(_ coordinator: SystemPickerCoordinator)
 }
 
-// MARK: - System Picker Coordinator
+public final class SystemPickerCoordinator: BaseCoordinator<UIViewController> {
+    public let colorScheme: ColorScheme
 
-final class SystemPickerCoordinator: BaseCoordinator<UIViewController> {
+    public var shouldTreatLivePhotosAsVideos: Bool = true
+    public weak var output: PickerCoordinatorOutput?
 
-    // MARK: Properties
-    private let mediaFetchService = MediaFetchService()
-    private let loadingViewController: PickerLoadingViewController
-    private let colorScheme: ColorScheme
-    private lazy var pickerConfiguration: PHPickerConfiguration = {
-        var config = PHPickerConfiguration(photoLibrary: .shared())
-        config.selectionLimit = 1
-        config.preferredAssetRepresentationMode = .current
-        if #available(iOS 17.0, *) {
-            config.disabledCapabilities = [.sensitivityAnalysisIntervention]
-        }
-        return config
-    }()
-    weak var output: PickerCoordinatorOutput?
-
-    // MARK: Initialization
-    
-    init(rootViewController: UIViewController, colorScheme: ColorScheme, filter: PHPickerFilter?) {
-        self.loadingViewController = PickerLoadingViewController(colorScheme: colorScheme)
-        self.colorScheme = colorScheme
-        super.init(rootViewController: rootViewController)
-        self.pickerConfiguration.filter = filter
+    public var topViewController: UIViewController {
+        return sheetViewController
     }
 
-    // MARK: Coordinator
+    private lazy var mediaFetchService: MediaFetchService = .init()
+
+    private lazy var loadingViewController: PickerLoadingViewController = {
+        let controller = PickerLoadingViewController(colorScheme: colorScheme)
+        return controller
+    }()
+
+    private lazy var sheetContent: ProgressSheetContent = .init(colorScheme: colorScheme)
+    private lazy var sheetViewController: SheetViewController = makeSheetViewController()
+
+    private lazy var pickerConfiguration: PHPickerConfiguration = {
+        var configuration = PHPickerConfiguration(photoLibrary: .shared())
+        configuration.selectionLimit = 1
+        configuration.preferredAssetRepresentationMode = .current
+        if #available(iOS 17.0, *) {
+            configuration.disabledCapabilities = [.sensitivityAnalysisIntervention]
+        }
+        return configuration
+    }()
     
-    override func start() {
+    public init(rootViewController: UIViewController, colorScheme: ColorScheme, filter: PHPickerFilter? = nil) {
+        self.colorScheme = colorScheme
+        super.init(rootViewController: rootViewController)
+        pickerConfiguration.filter = filter
+    }
+    
+    override public func start() {
         // Present loading
         loadingViewController.modalPresentationStyle = .fullScreen
         rootViewController.present(loadingViewController, animated: true)
@@ -52,56 +57,105 @@ final class SystemPickerCoordinator: BaseCoordinator<UIViewController> {
         pickerViewController.modalPresentationStyle = loadingViewController.modalPresentationStyle
         loadingViewController.present(pickerViewController, animated: true)
     }
-    
-    private func dismissCoordinator() {
-        #warning("Check for vbiew hierarchy state before dismissing")
-        rootViewController.dismiss(animated: true)
+
+    private func makeSheetViewController() -> SheetViewController {
+        sheetContent = .init(colorScheme: colorScheme)
+        let controller = SheetViewController(content: sheetContent)
+        controller.dismissHandler = { [weak self] in
+            self?.mediaFetchService.cancel()
+        }
+        return controller
+    }
+
+    public func dismiss() {
+        if rootViewController.presentedViewController === loadingViewController {
+            rootViewController.dismiss(animated: true)
+        }
         delegate?.childCoordinatorDidFinish(self)
+    }
+
+    public func show(_ error: Error) {
+        errorHandler(error)
+    }
+
+    public func show(image: UIImage?, title: String, subtitle: String) {
+        sheetContent.state = .custom(image, title, subtitle)
+        sheetViewController.updateContent()
     }
 }
 
 // MARK: - PHPickerViewControllerDelegate
 
 extension SystemPickerCoordinator: PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+    public func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         guard let result = results.first else {
-            #warning("Check system behaviour for dismissing and etc")
-            dismissCoordinator()
-            return
+            output?.systemPickerCoordinatorDidCancel(self)
+            return dismiss()
         }
-        
-        let infoViewController = SheetInfoViewController(title: "Fetching", colorScheme: colorScheme)
-        let sheetViewController = SheetViewController(content: infoViewController)
-        
-        // Handle sheet dismissal
-        sheetViewController.dismissHandler = { [weak self] in
-            self?.mediaFetchService.cancel()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            if #available(iOS 16, *) {
+                let identifiers = results.compactMap(\.assetIdentifier)
+                picker.deselectAssets(withIdentifiers: identifiers)
+            }
         }
-        
+
+        sheetViewController = makeSheetViewController()
         picker.present(sheetViewController, animated: true)
-        processPickerResult(result, in: sheetViewController)
+        handle(result)
     }
     
-    private func processPickerResult(_ result: PHPickerResult, in sheetViewController: SheetViewController) {
-//        guard result.itemProvider.canLoadObject(ofClass: UIImage.self) else {
-//            dismissCoordinator()
-//            return
-//        }
-        
-        mediaFetchService.fetchAsset(for: result, progress: { progress in
-            // Update progress UI
-        }, success: { [weak self] fetchedMedia in
-            guard let self = self else { return }
-            switch fetchedMedia {
-            case .image(let image):
-                self.output?.systemPickerCoordinator(self, didPickImage: image, in: sheetViewController)
-            case .video(let video):
-                self.output?.systemPickerCoordinator(self, didPickVideo: video, in: sheetViewController)
+    private func handle(_ result: PHPickerResult) {
+        if mediaFetchService.canLoadLivePhoto(for: result) {
+            if shouldTreatLivePhotosAsVideos {
+                fetchAsset(for: result)
             }
-        }, failure: { [weak self] error in
-            guard let self = self else { return }
-            let errorViewController = SheetInfoViewController(title: "Error", subtitle: "An unexpected error occurred.", colorScheme: self.colorScheme)
-            sheetViewController.update(with: errorViewController)
-        })
+            else {
+                fetchImage(for: result)
+            }
+        }
+        else if mediaFetchService.canLoadImage(for: result) {
+            fetchImage(for: result)
+        }
+        else {
+            fetchAsset(for: result)
+        }
+    }
+
+    private func fetchAsset(for result: PHPickerResult) {
+        mediaFetchService.fetchAsset(for: result, progress: progressHandler, success: { [weak self] (asset: AVAsset) in
+            guard let self = self else {
+                return
+            }
+
+            self.handleFetchCompletion()
+            self.output?.systemPickerCoordinatorDidSelect(self, asset: asset)
+        }, failure: errorHandler)
+    }
+
+    private func fetchImage(for result: PHPickerResult) {
+        mediaFetchService.fetchImage(for: result, progress: progressHandler, success: { [weak self] (image: UIImage) in
+            guard let self = self else {
+                return
+            }
+
+            self.handleFetchCompletion()
+            self.output?.systemPickerCoordinatorDidSelect(self, image: image)
+        }, failure: errorHandler)
+    }
+
+    private func handleFetchCompletion() {
+        sheetContent.state = .progress("Fetching", 1.0)
+        sheetViewController.updateContent()
+    }
+
+    private func progressHandler(_ progress: Double) {
+        sheetContent.state = .progress("Fetching", Float(progress))
+        sheetViewController.updateContent()
+    }
+
+    private func errorHandler(_ error: Error) {
+        sheetContent.state = .failure(error)
+        sheetViewController.updateContent()
     }
 }
