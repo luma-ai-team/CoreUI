@@ -13,6 +13,7 @@ public final class ProgressSheetContent: DismissableSheetContentViewController {
         case failure(Error)
         case success(String)
         case custom(UIImage?, String, String?)
+        case action(String, String?, String, (UIAction) -> Void)
     }
 
     public var state: State {
@@ -38,9 +39,13 @@ public final class ProgressSheetContent: DismissableSheetContentViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
+
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var progressContainerView: UIView!
 
+    @IBOutlet weak var actionContainerView: UIView!
+    @IBOutlet weak var actionButton: BounceButton!
+    
     public init(colorScheme: ColorScheme, state: State = .progress(.init(), 0.0)) {
         self.state = state
         super.init(colorScheme: colorScheme)
@@ -62,34 +67,53 @@ public final class ProgressSheetContent: DismissableSheetContentViewController {
         subtitleLabel.textColor = colorScheme.subtitle
         imageView.tintColor = colorScheme.active
 
+        actionButton.backgroundColor = colorScheme.active
+        actionButton.setTitleColor(colorScheme.foreground, for: .normal)
+
         updateState()
     }
 
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         progressView.layer.cornerRadius = progressView.bounds.midY
+        actionButton.layer.cornerRadius = actionButton.bounds.midY
     }
 
     private func updateState() {
         switch state {
         case .progress(let title, let progress):
             progressContainerView.setHidden(false, animated: false)
+            actionContainerView.setHidden(true, animated: false)
             progressView.setProgress(progress, animated: true)
             update(title: title)
             isModalInPresentation = true
         case .failure(let error):
             progressContainerView.setHidden(true, animated: false)
+            actionContainerView.setHidden(true, animated: false)
             update(with: errorImage, title: "Error", subtitle: error.localizedDescription)
             isModalInPresentation = false
         case .success(let message):
             progressContainerView.setHidden(true, animated: false)
+            actionContainerView.setHidden(true, animated: false)
             update(with: successImage, title: message)
             isModalInPresentation = false
         case .custom(let image, let title, let subtitle):
             progressContainerView.setHidden(true, animated: false)
+            actionContainerView.setHidden(true, animated: false)
             update(with: image, title: title, subtitle: subtitle)
             isModalInPresentation = false
+        case .action(let title, let subtitle, let action, let handler):
+            progressContainerView.setHidden(true, animated: false)
+            actionContainerView.setHidden(false, animated: true)
+            update(with: nil, title: title, subtitle: subtitle)
+
+            actionButton.setTitle(action, for: .normal)
+            actionButton.titleLabel?.setRoundedSFFont()
+            actionButton.addAction(.init(handler: handler), for: .touchUpInside)
+            isModalInPresentation = false
         }
+
+        view.layout()
     }
 
     private func update(with image: UIImage? = nil, title: String, subtitle: String? = nil) {

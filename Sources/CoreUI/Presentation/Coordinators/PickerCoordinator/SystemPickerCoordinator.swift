@@ -1,7 +1,6 @@
 import UIKit
 import AVFoundation
 import PhotosUI
-import Vision
 
 public protocol PickerCoordinatorOutput: AnyObject {
     func systemPickerCoordinatorDidSelect(_ coordinator: SystemPickerCoordinator, image: UIImage)

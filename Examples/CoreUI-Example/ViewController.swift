@@ -24,6 +24,9 @@ class ViewController: UIViewController {
       )
 
     private lazy var pickerCoordinator: SystemPickerCoordinator = .init(rootViewController: self, colorScheme: colorScheme)
+    private lazy var shareCoordinator: ShareCoordinator = .init(rootViewController: self,
+                                                                colorScheme: colorScheme,
+                                                                contentDescription: "Banana")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +34,9 @@ class ViewController: UIViewController {
         shimmerButton.setTitle("Wow", for: .normal)
         shimmerButton.titleGradient = .solid(.white)
         shimmerButton.frame.size = .init(width: 300, height: 55)
+        shimmerButton.addAction(.init(handler: { _ in
+            self.showShare()
+        }), for: .touchUpInside)
         shimmerButton.center = view.center
         view.addSubview(shimmerButton)
     }
@@ -38,7 +44,8 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //showReviewDialog()
-        showPicker()
+        //showPicker()
+        showShare()
     }
     
     
@@ -54,6 +61,23 @@ class ViewController: UIViewController {
         pickerCoordinator.shouldTreatLivePhotosAsVideos = false
         pickerCoordinator.output = self
         pickerCoordinator.start()
+    }
+
+    func showShare() {
+        shareCoordinator.output = self
+        shareCoordinator.start()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.shareCoordinator.show(progress: 0.5)
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.shareCoordinator.show(progress: 1.0)
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.shareCoordinator.save(.init(named: "Test") ?? .init())
+        }
     }
 }
 
@@ -79,5 +103,17 @@ extension ViewController: PickerCoordinatorOutput {
                              title: "No Face Detected",
                              subtitle: "Please select and image with a face.")
         }
+    }
+}
+
+// MARK: - ShareCoordinatorOutput
+
+extension ViewController: ShareCoordinatorOutput {
+    func shareCoordinatorDidCancel(_ coordinator: ShareCoordinator) {
+        print("cancel")
+    }
+
+    func shareCoordinatorDidSave(_ coordinator: ShareCoordinator, assetIdentifier: String) {
+        print(assetIdentifier)
     }
 }

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/oz/Draftz/Production/CoreUI/Examples/CoreUI-Example.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>

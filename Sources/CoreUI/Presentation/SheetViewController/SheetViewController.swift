@@ -12,6 +12,16 @@ open class SheetViewController: UIViewController {
     public private(set) var content: any SheetContent
     public var dismissHandler: (() -> Void)?
 
+    public var floatingView: UIView? {
+        didSet {
+            oldValue?.removeFromSuperview()
+            if let floatingView = floatingView {
+                sheet.containerView?.insertSubview(floatingView, at: 0)
+            }
+            view.setNeedsLayout()
+        }
+    }
+
     private var sheet: UISheetPresentationController {
         if let sheetPresentationController = sheetPresentationController {
             return sheetPresentationController
@@ -56,6 +66,13 @@ open class SheetViewController: UIViewController {
         updateGestureRecognizers()
     }
 
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIView.defaultSpringAnimation {
+            self.floatingView?.alpha = 0.0
+        }
+    }
+
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         if isBeingDismissed {
@@ -76,6 +93,14 @@ open class SheetViewController: UIViewController {
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         content.view.frame = view.bounds
+
+        if let floatingView = floatingView,
+           let containerView = sheet.containerView {
+            floatingView.frame = .init(x: 0.0,
+                                       y: 0.0,
+                                       width: containerView.bounds.width,
+                                       height: containerView.bounds.height - view.bounds.height + 16.0)
+        }
     }
 
     open override func viewSafeAreaInsetsDidChange() {
@@ -90,7 +115,7 @@ open class SheetViewController: UIViewController {
 
     open func update(with content: any SheetContent) {
         if self.content !== content {
-            content.view.frame = self.content.view.frame
+            content.view.frame.size.width = self.content.view.frame.size.width
             self.content.view.removeFromSuperview()
         }
 
