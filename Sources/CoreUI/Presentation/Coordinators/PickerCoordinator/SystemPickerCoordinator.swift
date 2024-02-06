@@ -73,6 +73,11 @@ public final class SystemPickerCoordinator: BaseCoordinator<UIViewController> {
         delegate?.childCoordinatorDidFinish(self)
     }
 
+    public func show(title: String, progress: Double) {
+        sheetContent.state = .progress(title, progress)
+        sheetViewController.updateContent()
+    }
+
     public func show(_ error: Error) {
         errorHandler(error)
     }
