@@ -63,7 +63,11 @@ public final class SharingSuccessSheetContent: DismissableSheetContentViewContro
 
         starsView.animation = LottieAnimation.asset("lottie-stars-anim", bundle: .module)
         starsView.contentMode = .scaleAspectFill
-        starsView.play()
+        starsView.loopMode = .loop
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.starsView.play()
+        }
+        
 
         reviewContainerView.backgroundColor = colorScheme.background
         reviewContainerView.roundCorners(to: .custom(10.0))

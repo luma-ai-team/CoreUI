@@ -28,13 +28,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="D20-PQ-4Gq">
-                    <rect key="frame" x="20" y="38.000000000000014" width="335" height="212.33333333333337"/>
+                    <rect key="frame" x="20" y="38" width="335" height="221"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dMD-LZ-bt2" userLabel="imageView">
-                            <rect key="frame" x="0.0" y="2.3333333333333321" width="335" height="16.333333333333336"/>
+                            <rect key="frame" x="0.0" y="-1.6666666666666652" width="335" height="3.9999999999999964"/>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ovA-hW-egg">
-                            <rect key="frame" x="0.0" y="40.333333333333329" width="335" height="18"/>
+                            <rect key="frame" x="0.0" y="20" width="335" height="18"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eB-KH-MDm" userLabel="titleLabel">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="18"/>
@@ -53,25 +53,25 @@
                             </subviews>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTi-f9-ojW" userLabel="appReviewView">
-                            <rect key="frame" x="0.0" y="78.333333333333314" width="335" height="134"/>
+                            <rect key="frame" x="0.0" y="58" width="335" height="163"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TWc-hB-dcI" userLabel="reviewContainerView">
-                                    <rect key="frame" x="40" y="0.0" width="255" height="134"/>
+                                    <rect key="frame" x="40" y="0.0" width="255" height="163"/>
                                     <subviews>
                                         <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="DzA-Wb-TUc">
-                                            <rect key="frame" x="0.0" y="16.000000000000014" width="255" height="102"/>
+                                            <rect key="frame" x="0.0" y="16" width="255" height="131"/>
                                             <subviews>
                                                 <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1Rt-iE-MTC">
-                                                    <rect key="frame" x="36.666666666666671" y="0.0" width="182" height="61"/>
+                                                    <rect key="frame" x="26.333333333333329" y="0.0" width="202.33333333333337" height="79"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loving Our App?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTh-Ht-JyD" userLabel="reviewTitleLabel">
-                                                            <rect key="frame" x="24" y="0.0" width="134" height="39"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enjoying The App?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTh-Ht-JyD" userLabel="reviewTitleLabel">
+                                                            <rect key="frame" x="26" y="0.0" width="150.66666666666666" height="57"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review us on the App Store!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJg-a6-a34" userLabel="reviewSubtitleLabel">
-                                                            <rect key="frame" x="0.0" y="44" width="182" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Support us with a 5-star rating!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJg-a6-a34" userLabel="reviewSubtitleLabel">
+                                                            <rect key="frame" x="0.0" y="62" width="202.33333333333334" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -79,11 +79,11 @@
                                                     </subviews>
                                                 </stackView>
                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VNP-1w-9p5" userLabel="starsView" customClass="LottieAnimationView" customModule="Lottie">
-                                                    <rect key="frame" x="37.666666666666671" y="78" width="180" height="24"/>
+                                                    <rect key="frame" x="27.666666666666671" y="96" width="200" height="35"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="24" id="CTr-9v-r5m"/>
-                                                        <constraint firstAttribute="width" constant="180" id="s2y-Kz-Mh5"/>
+                                                        <constraint firstAttribute="height" constant="35" id="CTr-9v-r5m"/>
+                                                        <constraint firstAttribute="width" constant="200" id="s2y-Kz-Mh5"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
