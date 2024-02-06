@@ -153,7 +153,7 @@ public final class ShareCoordinator: BaseCoordinator<UIViewController> {
 
     private func showPermissionsError() {
         progressContent.state = .action("Can't Access Photos",
-                                        "To save videos to your device, we need Photos access.",
+                                        "To save photos to your device, we need Photos access.",
                                         "Open settings", { _ in
             guard let url = URL(string: UIApplication.openSettingsURLString) else {
                 return
