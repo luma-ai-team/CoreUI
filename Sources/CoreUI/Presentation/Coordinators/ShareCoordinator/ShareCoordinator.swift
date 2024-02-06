@@ -26,6 +26,10 @@ public final class ShareCoordinator: BaseCoordinator<UIViewController> {
     public let shouldAskForAppReview: Bool
     public weak var output: ShareCoordinatorOutput?
 
+    public var hasSavingPermissions: Bool {
+        return PHPhotoLibrary.authorizationStatus(for: .addOnly) == .authorized
+    }
+
     private lazy var progressContent: ProgressSheetContent = .init(colorScheme: colorScheme)
     private lazy var successContent: SharingSuccessSheetContent = {
         let content = SharingSuccessSheetContent(colorScheme: colorScheme,
@@ -161,7 +165,7 @@ public final class ShareCoordinator: BaseCoordinator<UIViewController> {
     }
 
     private func progressHandler(_ progress: Double) {
-        progressContent.state = .progress("Saving \(contentDescription)", Float(progress))
+        progressContent.state = .progress("Saving \(contentDescription)", progress)
         sheetViewController.updateContent()
     }
 

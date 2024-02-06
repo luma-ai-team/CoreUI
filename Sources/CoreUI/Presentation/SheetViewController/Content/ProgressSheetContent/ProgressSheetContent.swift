@@ -9,7 +9,7 @@ import UIKit
 public final class ProgressSheetContent: DismissableSheetContentViewController {
 
     public enum State {
-        case progress(String, Float)
+        case progress(String, Double)
         case failure(Error)
         case success(String)
         case custom(UIImage?, String, String?)
@@ -84,7 +84,7 @@ public final class ProgressSheetContent: DismissableSheetContentViewController {
         case .progress(let title, let progress):
             progressContainerView.setHidden(false, animated: false)
             actionContainerView.setHidden(true, animated: false)
-            progressView.setProgress(progress, animated: true)
+            progressView.setProgress(Float(progress), animated: true)
             update(title: title)
             isModalInPresentation = true
         case .failure(let error):

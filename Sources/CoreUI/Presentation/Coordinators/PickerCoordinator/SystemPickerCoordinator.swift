@@ -149,7 +149,7 @@ extension SystemPickerCoordinator: PHPickerViewControllerDelegate {
     }
 
     private func progressHandler(_ progress: Double) {
-        sheetContent.state = .progress("Fetching", Float(progress))
+        sheetContent.state = .progress("Fetching", progress)
         sheetViewController.updateContent()
     }
 
