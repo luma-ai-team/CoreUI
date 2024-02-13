@@ -80,6 +80,8 @@ public final class ProgressSheetContent: DismissableSheetContentViewController {
     }
 
     private func updateState() {
+        loadViewIfNeeded()
+
         switch state {
         case .progress(let title, let progress):
             progressContainerView.setHidden(false, animated: false)
