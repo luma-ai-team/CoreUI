@@ -40,9 +40,9 @@ open class DismissableSheetContentViewController: UIViewController, DismissableS
         return button
     }()
 
-    public init(colorScheme: ColorScheme) {
+    public init(colorScheme: ColorScheme, bundle: Bundle) {
         self.colorScheme = colorScheme
-        super.init(nibName: nil, bundle: .module)
+        super.init(nibName: nil, bundle: bundle)
     }
     
     required public init?(coder: NSCoder) {
